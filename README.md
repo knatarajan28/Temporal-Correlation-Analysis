@@ -30,4 +30,4 @@
 - Implementing more frequent or strategically timed sampling of metabolites to capture relevant changes more effectively.
 - Exploring additional variables such as specific types of surgery, patient demographics, and detailed clinical interventions that might influence metabolite dynamics.
 
-( Look at the 86 Metabolities powerpointin this repository for the time series plots generated for each of the 86 metabolites )
+( Look at the 86 Metabolities powerpoint in this repository for the time series plots generated for each of the 86 metabolites )
