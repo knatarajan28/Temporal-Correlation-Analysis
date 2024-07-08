@@ -132,3 +132,102 @@ save_plots_for_combined_data <- function(data) {
 }
 
 save_plots_for_combined_data(clean_combined_data)
+
+
+
+##############Regression Analysis#########################
+
+# Separate the data into two cohorts: ARDS and Non-ARDS
+data_ards <- clean_combined_data %>% filter(COHORT == "ARDS")
+data_non_ards <- clean_combined_data %>% filter(COHORT == "Non-ARDS")
+
+# Perform linear regression for each metabolite within each cohort and store results
+results_ards <- data_ards %>%
+  group_by(Metabolite) %>%
+  do(tidy(lm(value ~ sofa_max_within24hours_from_ICUadmission, data = .)))
+
+results_non_ards <- data_non_ards %>%
+  group_by(Metabolite) %>%
+  do(tidy(lm(value ~ sofa_max_within24hours_from_ICUadmission, data = .)))
+
+# Filter results to keep only coefficients
+coefficients_ards <- results_ards %>% filter(term == "sofa_max_within24hours_from_ICUadmission")
+coefficients_non_ards <- results_non_ards %>% filter(term == "sofa_max_within24hours_from_ICUadmission")
+
+# Add a column to identify the cohort
+coefficients_ards <- coefficients_ards %>% mutate(COHORT = "ARDS")
+coefficients_non_ards <- coefficients_non_ards %>% mutate(COHORT = "Non-ARDS")
+
+# Combine the coefficients data
+combined_coefficients <- bind_rows(coefficients_ards, coefficients_non_ards)
+
+# Plot the coefficients using separate box plots for each cohort
+ggplot(combined_coefficients, aes(x = Metabolite, y = estimate, fill = COHORT)) +
+  geom_boxplot() +
+  facet_wrap(~ COHORT) +
+  labs(title = "Regression Coefficients of Metabolites vs. SOFA Score",
+       x = "Metabolite",
+       y = "Coefficient Estimate") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+# Save the plot
+ggsave("regression_coefficients_boxplot_by_cohort.png")
+
+# Display the results
+print(combined_coefficients)
+
+### Using pvalue###
+significant_ards <- combined_coefficients %>% filter(COHORT == "ARDS" & p.value < 0.05)
+significant_non_ards <- combined_coefficients %>% filter(COHORT == "Non-ARDS" & p.value < 0.05)
+
+print("Significant Metabolites in ARDS Cohort:")
+print(significant_ards)
+
+print("Significant Metabolites in Non-ARDS Cohort:")
+print(significant_non_ards)
+
+#####################################################
+
+# Filter for strong relationships (|coefficient| >= 0.6 and p-value < 0.05)
+strong_relationships_ards <- coefficients_ards %>% 
+  filter(abs(estimate) >= 0.6 & p.value < 0.05)
+
+strong_relationships_non_ards <- coefficients_non_ards %>% 
+  filter(abs(estimate) >= 0.6 & p.value < 0.05)
+
+print("Strong Relationships in ARDS Cohort:")
+print(strong_relationships_ards)
+
+print("Strong Relationships in Non-ARDS Cohort:")
+print(strong_relationships_non_ards)
+
+#########################################################################################################
+install.packages("gridExtra")
+library("gridExtra")
+
+categorized_coefficients <- combined_coefficients %>%
+  mutate(correlation = case_when(
+    abs(estimate) >= 0.6 ~ "Strong",
+    abs(estimate) >= 0.4 & abs(estimate) < 0.6 ~ "Moderate",
+    abs(estimate) >= 0.2 & abs(estimate) < 0.4 ~ "Weak",
+    abs(estimate) < 0.2 ~ "No"
+  ))
+
+# Display the categorized table
+print("Categorized Correlations:")
+print(categorized_coefficients)
+
+# Save the categorized table as a CSV file
+write.csv(categorized_coefficients, "categorized_correlations.csv", row.names = FALSE)
+
+# Plot the categorized results using facet_wrap
+plot <- ggplot(categorized_coefficients, aes(x = Metabolite, y = estimate, fill = correlation)) +
+  geom_boxplot() +
+  facet_wrap(~ COHORT) +
+  labs(title = "Regression Coefficients for ARDS and Non-ARDS Cohorts",
+       x = "Metabolite",
+       y = "Coefficient Estimate") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+# Display the plot
+print(plot)
