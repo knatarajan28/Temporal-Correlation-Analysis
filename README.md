@@ -31,3 +31,4 @@
 - Exploring additional variables such as specific types of surgery, patient demographics, and detailed clinical interventions that might influence metabolite dynamics.
 
 ( Look at the 86 Metabolities powerpoint in this repository for the time series plots generated for each of the 86 metabolites )
+(Also look into the Correlation Results powerpoint for data based on the linear regression results presented as a boxplot for all metabolites )
