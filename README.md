@@ -1,34 +1,13 @@
-# Temporal Regression Analysis Project
-
-# Research Hypothesis:
-- Post-operative patients with high SOFA scores show increasing metabolite values over time after ICU admission and are more likely to develop ARDS.
-
-# Sample Size: 
-- 40 critically ill post-operative ICU patients.
-
-# Objective: 
-- Conduct a temporal regression analysis to assess the relationship between SOFA scores, metabolite values, and the likelihood of developing ARDS.
-
-# Plan of Action:
-- Conducted a study to investigate if post-operative patients with high SOFA scores exhibit increasing metabolite values over time and a higher likelihood of developing ARDS.
-- Utilized a sample of 40 critically ill ICU patients undergoing surgery.
-- Performed temporal regression analysis to evaluate the hypothesis and compare outcomes between cohorts with time periods ranging (less than 3 days, 3-6 days, 6-9 days and 9-12 days after surgery)
-
-# Key Findings:
-- No specific trends were observed in the metabolite values over time, indicating a lack of consistent increase or decrease across the defined time periods.
-- Metabolite fluctuations appeared random without a clear pattern correlating to the duration post-surgery or SOFA score severity.
-
-# Possible Explanations for the Results:
-- Individual Variation: The random fluctuations in metabolite levels might reflect individual physiological responses to surgery, which can vary significantly due to factors like pre-existing conditions, age, and surgical intervention specifics.
-- Sample Size Limitations: A sample of 40 patients may not provide sufficient power to detect subtle trends or differences in metabolite changes over time.
-- Complexity of Metabolic Responses: Post-operative metabolic responses can be influenced by numerous factors, including medications, treatments like fluid therapy or mechanical ventilation, and complications such as infections or other organ dysfunctions.
-# Clinical Implications:
-- The absence of detectable trends in metabolite levels suggests that monitoring these may not provide reliable indicators for the development of ARDS in post-operative patients solely based on the time intervals and SOFA scores used in this study.
-- Further research with a larger cohort and more frequent sampling might be necessary to clarify the role of metabolites in predicting ARDS risk post-surgery.
-# Recommendations for Future Research:
-- Increasing the sample size to enhance the statistical power of the study.
-- Implementing more frequent or strategically timed sampling of metabolites to capture relevant changes more effectively.
-- Exploring additional variables such as specific types of surgery, patient demographics, and detailed clinical interventions that might influence metabolite dynamics.
-
-( Look at the 86 Metabolities powerpoint in this repository for the time series plots generated for each of the 86 metabolites )
-(Also look into the Correlation Results powerpoint for data based on the linear regression results presented as a boxplot for all metabolites )
+# Temporal Correlation Analysis Project
+Metabolomic Profiling as Predictive Biomarkers for the Early Detection of ARDS in ICU Patients
+Objective:
+-Investigate the association between plasma metabolite levels and SOFA (Sequential Organ Failure Assessment) scores in ICU patients to identify potential biomarkers for early detection and risk stratification of Acute Respiratory Distress Syndrome (ARDS).
+Methods:
+-Conducted Spearman correlation analysis to assess relationships between 86 plasma metabolites and SOFA scores across four distinct post-operative periods.
+-Performed pathway enrichment analysis using KEGG (Kyoto Encyclopedia of Genes and Genomes) and SMPDB (Small Molecule Pathway Database) to identify significant metabolic pathways.
+Key Findings:
+-Identified significant metabolic pathways associated with clinical severity in early post-operative phases, including Fructose-Mannose and Galactose metabolism.
+-Demonstrated the evolving and significant correlations of metabolites like beta-hydroxy acids, purine nucleosides, and various amino acids across different post-operative phases.
+-Highlighted significant correlations and metabolic pathway involvements that could potentially influence clinical outcomes and ARDS pathogenesis.
+Impact:
+-The study's findings contribute to the precision-medicine approach in critical care, enhancing the understanding of ARDS at a molecular level and aiding in the development of targeted therapies.
