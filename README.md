@@ -1,4 +1,3 @@
-# Temporal Correlation Analysis Project
 # Metabolomic Profiling as Predictive Biomarkers for the Early Detection of ARDS in ICU Patients
 # Objective:
 -Investigate the association between plasma metabolite levels and SOFA (Sequential Organ Failure Assessment) scores in ICU patients to identify potential biomarkers for early detection and risk stratification of Acute Respiratory Distress Syndrome (ARDS).
